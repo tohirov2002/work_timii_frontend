@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.container{
+    max-width: 1300;
+    margin: 0 auto;
+    padding: 0 0px;
+}
+:hover.cours{
+    transform: scale(1.05);
+}
+.cours {
+    transition: .3s linear;
+}
+:hover.btn{
+    transform: scale(1.05);
+}
+.btn {
+    transition: .3s linear ;
+}
+:hover.cours > button{
+    background-color: blue;
+}
+:hover.cours1 > button{
+    background-color: rgb(35, 210, 35);
+}
+:hover.btns{
+    transform: scale(1.05);
+}
+.btns{
+    transition: .3s linear ;
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #282c34;
+  }
