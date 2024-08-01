@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
-import Logo from '../../assets/images/timi_logo.jpg'
+import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import Logo from '../../assets/images/timi_logo.jpg';
 import { IoSunny } from "react-icons/io5";
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
-
+  const navigate = useNavigate(); // Initialize useNavigate
   const userData = JSON.parse(localStorage.getItem('user'));
-
   const userName = userData ? userData.username : null;
+
+  const handleLogout = () => {
+    localStorage.removeItem('user'); // Clear user data from localStorage
+    navigate('/'); // Redirect to login page
+  };
 
   return (
     <>
@@ -30,14 +35,24 @@ const Header = () => {
               </ul>
             </div>
             <ul className='flex items-cente cursor-pointer'>
-              {userName ? <span className='bg-blue-500 text-white p-2 rounded-md text-[16px] mr-4'>{userName}</span> : <li className='pr-6'>
-                <NavLink to={'/register'}>
-                  <button className='bg-blue-500 text-white w-[100px] p-2 rounded-md text-[16px] mr-5'>Kirish</button>
-                </NavLink>
-                <NavLink to={'/register'}>
-                  <button className='bg-blue-500 text-white w-[150px] p-2 rounded-md text-[16px]'>Ro'yxatdan o'tish</button>
-                </NavLink>
-              </li>}
+              {userName ? (
+                <select className='mr-5 bg-blue-400 text-white text-[18px] p-2 rounded-xl' name="" id="" onChange={(e) => {
+                  if (e.target.value === 'logout') handleLogout();
+                }}>
+                  <option value="">{userName}</option>
+                  <option value="password-change">Password Change</option>
+                  <option value="logout">Logout</option>
+                </select>
+              ) : (
+                <li className='pr-6'>
+                  <NavLink to={'/register'}>
+                    <button className='bg-blue-500 text-white w-[100px] p-2 rounded-md text-[16px] mr-5'>Kirish</button>
+                  </NavLink>
+                  <NavLink to={'/register'}>
+                    <button className='bg-blue-500 text-white w-[150px] p-2 rounded-md text-[16px]'>Ro'yxatdan o'tish</button>
+                  </NavLink>
+                </li>
+              )}
               <li className='pr-5'>
                 <IoSunny className='text-yellow-600 w-[30px] h-[30px]' />
               </li>
@@ -49,7 +64,7 @@ const Header = () => {
         </div>
       </header>
     </>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

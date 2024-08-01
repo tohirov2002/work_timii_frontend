@@ -26,8 +26,8 @@
 :hover.cours > button{
     background-color: blue;
 }
-:hover.cours1 > button{
-    background-color: rgb(35, 210, 35);
+:hover.cours > .nav1 > .button2{
+    background-color: blue;
 }
 :hover.btns{
     transform: scale(1.05);
@@ -35,7 +35,9 @@
 .btns{
     transition: .3s linear ;
 }
-
+:hover.box > .nav > .button1 {
+    background-color: rgb(35, 210, 35);
+}
 .App {
     display: flex;
     justify-content: center;

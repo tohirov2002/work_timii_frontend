@@ -51,6 +51,9 @@ function Registration() {
   const navigate = useNavigate();
   const [selectedDistrict, setSelectedDistrict] = useState("");
 
+  const [loginEmail, setLoginEmail] = useState("")
+  const [loginPassword, setLoginPassword] = useState("")
+
   const onRegionChange = (e) => {
     const region = e.target.value;
     setSelectedRegion(region);
@@ -90,8 +93,33 @@ function Registration() {
       }
     }
   };
-
-
+  const loginSubmit = async (e) => {
+    e.preventDefault();
+    if (!loginEmail || !loginPassword) {
+      setError("Both email and password are required");
+      return;
+    }
+  
+    const userData = {
+      email: loginEmail,
+      password: loginPassword,
+    };
+  
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/user/login/", userData);
+      console.log("Login successful:", response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+      navigate("/");
+    } catch (error) {
+      console.error("Login error:", error);
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+        setError(error.response.data);
+      } else {
+        setError("There was an error logging in.");
+      }
+    }
+  };  
 
   return (
     <div className="mt-[20px]">
@@ -150,10 +178,16 @@ function Registration() {
             </Form>
           </SignUpContainer>
           <SignInContainer signingIn={signIn}>
-            <Form>
-              <Title>Sign in</Title>
-              <Input type="email" placeholder="Email" />
-              <Input type="password" placeholder="Password" />
+            <Form onSubmit={loginSubmit}>
+              <Title>Kirishni tanlang </Title>
+              <div className="mt-[20px]">
+                <select className="w-full max-w-[250px] p-3 pr-[20px] mb-4" name="role" id="role" value={role} onChange={(e) => setRole(e.target.value)}>
+                  <option value="center">O'quv markaz</option>
+                  <option value="student">O'quvchi</option>
+                </select>
+              </div>
+              <Input value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} type="email" placeholder="Email" />
+              <Input value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}  type="password" placeholder="Password" />
               <Anchor href="#">Forgot your password?</Anchor>
               <Button type="submit">Sign In</Button>
             </Form>
@@ -161,14 +195,14 @@ function Registration() {
           <OverlayContainer signingIn={signIn}>
             <Overlay signingIn={signIn}>
               <LeftOverlayPanel signingIn={signIn}>
-                <Title>Welcome Back!</Title>
-                <Paragraph>To keep connected with us please login with your personal info</Paragraph>
-                <GhostButton onClick={() => setSignIn(true)}>Sign In</GhostButton>
+                <Title>Salom Do'stim</Title>
+                <Paragraph>Agar siz avval Ro'yxatdan o'tgan bo'lsangiz pastdagi kirish tugmasini bosing</Paragraph>
+                <GhostButton onClick={() => setSignIn(true)}>Kirish</GhostButton>
               </LeftOverlayPanel>
               <RightOverlayPanel signingIn={signIn}>
-                <Title>Hello, Friend!</Title>
-                <Paragraph>Enter your personal details and start journey with us</Paragraph>
-                <GhostButton onClick={() => setSignIn(false)}>Sign Up</GhostButton>
+                <Title>Salom Do'stim!</Title>
+                <Paragraph>Agar siz avval Ro'yxatdan o'tganmagan bo'lsangiz pastdagi Ro'yxatdan o'tish tugmasini bosing</Paragraph>
+                <GhostButton onClick={() => setSignIn(false)}>Ro'yxatdan o'tish</GhostButton>
               </RightOverlayPanel>
             </Overlay>
           </OverlayContainer>

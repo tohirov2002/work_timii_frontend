@@ -4,6 +4,7 @@ import yangilik1 from '../../../src/assets/images/yangilik1.jpg'
 import yangilik2 from '../../../src/assets/images/yangilik2.jpg'
 import yangilik3 from '../../../src/assets/images/yangilik3.jpeg'
 import Statistica from './Statistica'
+import { NavLink } from 'react-router-dom'
 
 
 const Section1 = () => {
@@ -25,16 +26,24 @@ const Section1 = () => {
             <h1 className='text-white text-[22px]'>DTM testlar</h1>
             <h1 className='text-white text-[30px] pt-4'>O'quv markaz uchun</h1>
             {userName ?
-              <button className='text-white w-[120px] rounded-md bg-green-500 hover:bg-blue-500 p-2 mt-6 btn'>batafsil</button> :
-              <button className='text-white w-[120px] rounded-md bg-green-500 hover:bg-blue-500 p-2 mt-6 btn'>kirish</button>
+              <NavLink className={'nav1'} to={'/departament'}>
+                <button className='text-white w-[120px] rounded-md bg-green-500 hover:bg-blue-500 p-2 mt-6 btn button2'>batafsil</button>
+              </NavLink> :
+              <NavLink className={'nav1'} to={'/register'}>
+                <button className='text-white w-[120px] rounded-md bg-green-500 hover:bg-blue-500 p-2 mt-6 button1 btn button2'>kirish</button>
+              </NavLink>
             }
           </div>
-          <div className='w-full max-w-[500px] bg-green-600 hover:bg-blue-600 flex items-center justify-center flex-col h-[300px] rounded-xl cursor-pointer cours cours1'>
+          <div className='box w-full max-w-[500px] bg-green-600 hover:bg-blue-600 flex items-center justify-center flex-col h-[300px] rounded-xl cursor-pointer cours cours1'>
             <h1 className='text-white text-[22px]'>DTM testlar</h1>
             <h1 className='text-white text-[30px] pt-4'>Abiturient uchun</h1>
             {userName ?
-              <button className='text-white w-[120px] rounded-md bg-blue-600 hover:bg-blue-500 p-2 mt-6 btn'>batafsil</button>:
-              <button className='text-white w-[120px] rounded-md bg-blue-600 hover:bg-blue-500 p-2 mt-6 btn'>kirish</button>
+              <NavLink className={'nav'} to={'/abiturent'}>
+                <button className='text-white w-[120px] rounded-md bg-blue-600 hover:bg-blue-500 p-2 mt-6 btn button1'>batafsil</button> :
+              </NavLink> :
+              <NavLink to={'/register'} className={'nav'}>
+                <button className='text-white w-[120px] rounded-md bg-blue-600 hover:bg-blue-500 p-2 mt-6 btn button1'>kirish</button>
+              </NavLink>
             }
           </div>
         </div>

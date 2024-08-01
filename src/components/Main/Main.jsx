@@ -2,6 +2,7 @@ import React from 'react'
 import Section1 from './Section1'
 import Statistica from './Statistica'
 import Layout from '../Layout/Index'
+import Department from '../Pages/Department'
 
 const Main = () => {
   return (
